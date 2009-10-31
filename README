@@ -16,6 +16,23 @@ You may also need to install pcntl:
   make
   make install
 
+Create a new table:
+
+#
+# Table structure for table 'tasks'
+#
+
+CREATE TABLE /*!32312 IF NOT EXISTS*/ `tasks` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `route` varchar(50) default NULL,
+  `uri` text,
+  `e` tinyint(1) unsigned NOT NULL default '0',
+  `priority` tinyint(2) unsigned default NULL,
+  `created` int(11) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+
+
 == A Task ased Queue
 
 A php server daemon is run through php cli (command line) that spawns parrallel processes to complete any tasks it finds in the database.
