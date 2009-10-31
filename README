@@ -30,7 +30,7 @@ CREATE TABLE /*!32312 IF NOT EXISTS*/ `tasks` (
   `priority` tinyint(2) unsigned default NULL,
   `created` int(11) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 == A Task ased Queue
