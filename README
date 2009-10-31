@@ -1,0 +1,67 @@
+=============
+Introduction
+=============
+
+Task Queue is a task-based queue module for KO3. It was based on the Task_Queue module (a KO2 task queue on a RDBMS datastore) and MangoQueue.
+
+=============
+Requirements
+=============
+
+Compiled php with additional ./configure --enable-pcntl
+
+You may also need to install pcntl:
+- download php source
+cd /php.../ext/pcntl
+phpize
+./configure
+make
+make install
+
+=============
+A Task ased Queue
+=============
+
+A php server daemon is run through php cli (command line) that spawns parrallel processes to complete any tasks it finds in the database.
+
+Each task simply consists of a route and uri:
+
+Request::factory( Route::get( $task->route )->uri( $task->uri ) )->execute();
+
+=============
+Usage: Adding tasks
+=============
+
+Adding a task to the queue, is simple:
+
+task_queue::add_task('route', 'controller', 'action', 'id', $priority);
+
+Of course, the keys of the URI array should match the keys you have specified in the route you’re requesting.
+
+=============
+Executing tasks
+=============
+
+When adding a task, you specify what route/controller/action/id should is requested. You have to build the controllers yourself. You can opt to have your controller extend Controller_CLI. This way, the controller will only be accessiible by CLI (and not from the web).
+
+class Controller_MyQueue extends Controller_Cli {
+
+	public function action_action1($id)
+	{
+		// do something
+	}
+}
+
+=============
+Running the queue daemon
+=============
+
+After setting some preferences in the daemon config file, running the daemon is simple, from the root command line run:
+
+php index.php --uri=daemon
+
+or you can start/restart/stop the daemon from any controller:
+
+task_queue::daemon_start(true);
+task_queue::daemon_restart();
+task_queue::daemon_stop();

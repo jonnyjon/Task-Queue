@@ -1,0 +1,1 @@
+*/10 * * * * php /var/www/html/socialmention.com/index.php --uri=cli/cron/10  > /dev/null &
